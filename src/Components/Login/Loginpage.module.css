@@ -1,0 +1,43 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: var(--gray);
+    padding: 30px 20px;
+    margin: 10px auto;
+    border-radius: 20px;
+    border: 2px solid var(--color-seven);
+}
+
+.header {
+    color: var(--color-six);
+}
+
+.form div {
+    width: 100%;
+}
+
+.form input {
+    border: 1px solid var(--color-four);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.form label {
+    color: var(--color-one);
+
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.buttons button {
+    background-color: var(--color-four);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
