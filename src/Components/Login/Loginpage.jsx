@@ -5,14 +5,11 @@ import Button from "../UiElements/Button";
 import classes from "./Loginpage.module.css"
 import useForm from "@/hooks/useForm";
 import { useCallback } from "react";
-import { isEmail, isPast, minLength, theSame } from "@/helpers/validators";
+import { isEmail, minLength } from "@/helpers/validators";
 
 const formValidators = {
-  name: minLength,
   email: isEmail,
-  birthdate: isPast,
   password: minLength,
-  passwordConfirm: theSame,
 };
 
 const initialState = {
@@ -51,12 +48,13 @@ export default function LoginPage() {
                     id="password"
                     type="password"
                     name="password"
-                    label="Your password"
-                    placeholder="write an exist password"
-                    errorText="Please provide a valid password"
+                    label="Password"
+                    errorText="Password should be at least 6 chars"
+                    placeholder="***********"
                     inputState={formState.password}
                     onChange={handleChange}
                     onBlur={handleTouch}
+                    minLength={6}
                 />
                 <div className={classes["buttons"]}>
                     <Button disabled={!formIsValid} onClick={handleSubmit}>

@@ -1,21 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import Button from "@/Components/UiElements/Button";
-
 import classes from "./page.module.css";
 
+const intialstate = 5
+const MAX = 20
+const MIN = 6
+const AMOUNT = 2
+
+const reducer = (state, action) => {
+  const { type, amount } = action
+
+  switch (type) {
+    case "INCREMENT":
+      return state >= MAX ? state : state + 1;
+    case "DECREMENT":
+      return state <= MIN ? state : state - 1;
+    case "RESET":
+      return intialstate
+    case "INCREASE":
+      return state >= MAX ? state : state + AMOUNT
+    }
+
+}
+
 export default function BlogPage() {
-  const [counter, setCounter] = useState(0);
+  const [count, dispatch] = useReducer(reducer, intialstate)
+
   const [showList, setShowList] = useState(true);
 
-  const increaseCounter = () =>
-    setCounter((prev) => (prev >= 10 ? prev : prev + 1));
-
-  const decreaseCounter = () =>
-    setCounter((prev) => (prev <= 0 ? prev : prev - 1));
-
-  const resetCounter = () => setCounter(0);
+  const increaseCount = () => dispatch( {type: "INCREMENT"})
+  const decreaseCount = () => dispatch( {type: "DECREMENT"} )
+  const resetCount = () => dispatch( {type: "RESET"} )
+  const increase = () => dispatch( {type: "INCREASE", amount: 5} )
 
   const toggleMenu = () => setShowList((prev) => !prev);
 
@@ -23,16 +41,19 @@ export default function BlogPage() {
     <section>
       <h2>Blog Page</h2>
       <div>
-        <p>{counter}</p>
+        <p>{count}</p>
 
         <section className={classes["actions"]}>
-          <Button onClick={increaseCounter} disabled={counter >= 10}>
+          <Button onClick={increaseCount} disabled={count >= MAX}>
             +
           </Button>
-          <Button onClick={decreaseCounter} outline disabled={counter <= 0}>
+          <Button onClick={decreaseCount} outline disabled={count <= MIN}>
             -
           </Button>
-          <Button onClick={resetCounter} danger disabled={counter === 0}>
+          <Button onClick={increase} disabled={count >= MAX}>
+            +{AMOUNT}
+          </Button>
+          <Button onClick={resetCount} danger disabled={count === MIN}>
             Reset
           </Button>
         </section>
@@ -61,3 +82,4 @@ export default function BlogPage() {
     </section>
   );
 }
+
