@@ -33,6 +33,11 @@
   border-color: var(--red);
 }
 
+.success {
+  background-color: var(--color-seven);
+  outline: 1px solid var(--color-seven);
+}
+
 .outline {
   background-color: var(--color-three);
   border-color: var(--color-one);
