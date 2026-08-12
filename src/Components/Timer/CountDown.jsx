@@ -19,7 +19,7 @@ export default function CountDown({duration = 20_000}) {
             case "reset":
                 return {remainingTime: duration, endTime: null, isRunning: false}
             case "setRemain":
-                    return {...countDown, remainingTime: endTime - Date.now() }        
+                    return {...countDown, remainingTime: Math.max(endTime - Date.now(), 0) }        
             case "setIsRunning":
                     return {...countDown, isRunning: false}        
                 }
