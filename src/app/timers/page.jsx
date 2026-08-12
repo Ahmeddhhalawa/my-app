@@ -1,3 +1,4 @@
+import CountDown from "@/Components/Timer/CountDown"
 import StopWatch from "@/Components/Timer/StopWatch"
 
 const metadata = {
@@ -6,7 +7,9 @@ const metadata = {
 }
 
 export default function TimerPage() {
-    return <div>
-        <StopWatch />
+    return (
+        <div>
+            <StopWatch />
+            <CountDown />
         </div>
-}
+)}

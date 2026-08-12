@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { useEffect } from "react"
 import { useReducer } from "react"
 import Button from "../UiElements/Button"
+import handleTime from "@/helpers/handleTime"
 
 const intialValues = {time: 0, startTime: null, elapsedTime: 0, isRunning: false}
 const reducer = (timer, action) => {
@@ -41,9 +41,7 @@ export default function StopWatch() {
         return () => clearInterval(interval)
     }, [isRunning, startTime, elapsedTime])
 
-    const minutes = Math.floor(time / (60000)).toString().padStart(2, "0")
-    const seconds = Math.floor(time % (60000) / 1000).toString().padStart(2, "0")
-    const mill = Math.floor((time % 1000) / 10).toString().padStart(2, "0")
+    const [minutes, seconds, mill] = handleTime(time)
     return (
         <div>
             <p>{minutes}:{seconds}:{mill}</p>
