@@ -2,25 +2,24 @@
 
 import { usersDB } from "@/data/usersDB";
 import { isEmail, minLength } from "@/helpers/validators";
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 
-const loginContext = createContext(null)
 
-export const loginUser = ({email, password, }) => {
-    const {logedIn, setLogedIn} = useState(false)
+export function loginUser({email, password}) {
+    const [logIn, setLogIn] = useState(false)
     console.log(email, password)
     if(!email || !password) {
         throw new Error("Please provide email and password!") 
     }
-
+    
     if(!isEmail({value: email})) {
         throw new Error("Please provide a valid email!") 
     }
-
+    
     if(!minLength({value: password, min: 6})) {
         throw new Error("Password should be at least 6 chars!")
-};
-
+    };
+    
 const userExist = usersDB.find((user) => user.email === email)
 
 if(!userExist) {
@@ -31,22 +30,9 @@ if(userExist.password !== password) {
 }
 
 if(userExist.password === password  && userExist.email === email) {
-    setLogedIn(true)
+    setLogIn(true)
 }
 
-
-return {userExist, logedIn}
-}
-const logged = logedIn
-
-export function UserProvider({children}) {
-    return (
-        <loginContext.Provider value={{ userExist, logged }}>
-            {children}
-        </loginContext.Provider>
-)
+return {userExist, logIn}
 }
 
-export function useUser() {
-    return useContext(loginContext)
-}

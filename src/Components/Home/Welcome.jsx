@@ -8,11 +8,11 @@ import { useUser } from "@/actions/users";
 
 export default function Welcome() {
   
-  const { logged, userExist } = useUser()
+  const { logIn, userExist } = useUser()
   return (
     <section className={classes["welcome"]}>
       <div className={classes["text"]}>
-        <p className={classes["welcome-text"]}>Welcome {logged ? userExist.name : "!"}</p>
+        <p className={classes["welcome-text"]}>Welcome {logIn ? userExist.name : "!"}</p>
         <p className={classes["vision"]}>Learning Web</p>
         <p className={classes["vision"]}>Programming Today</p>
         <p className={classes["desc"]}>
