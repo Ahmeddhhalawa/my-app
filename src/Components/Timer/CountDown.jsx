@@ -4,8 +4,10 @@ import { useEffect, useReducer } from "react"
 import Button from "../UiElements/Button"
 import handleTime from "@/helpers/handleTime"
 
-export default function CountDown({duration = 20_000}) {
-    const intialValues = {remainingTime: duration, endTime: null, isRunning: false}
+const now = Date.now()
+
+export default function CountDown({duration = 20_000, running, controls}) {
+    const intialValues = {remainingTime: duration, endTime: running ? now + duration : null, isRunning: running}
     const reducer = (countDown, action) => {
         const { type } = action
         const {endTime, remainingTime} = countDown
@@ -53,12 +55,14 @@ export default function CountDown({duration = 20_000}) {
     return (
         <div>
         <p>{minutes}:{seconds}:{milli}</p>
-        <div>
+        {controls &&
+         <div>
             <Button success onClick={start}>Start</Button>
             <Button outline onClick={resume}>Resume</Button>
             <Button danger  onClick={pause}>Pause</Button>
             <Button onClick={reset}>Reset</Button>
         </div>
+}
         </div>
     )
 }

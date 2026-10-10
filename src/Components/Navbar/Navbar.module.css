@@ -64,11 +64,13 @@
   visibility: visible;
 }
 
-/* 
-  - 640px 767px
-  - 992px 1024px
-  - 1299px
-*/
+.theme-btn {
+  background-color: transparent;
+  color: var(--color-three);
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 @media (min-width: 767px) {
   .nav-bar {

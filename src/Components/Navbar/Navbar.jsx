@@ -3,11 +3,15 @@
 import Link from "next/link";
 import NavLink from "./NavLink";
 import { useState } from "react";
+import { useTheme } from "@/context/ThemeContext";
+import { IoSunnyOutline } from "react-icons/io5";
+import { FaMoon } from "react-icons/fa";
 
 import classes from "./Navbar.module.css";
 
 export default function Navbar() {
   const [showNavList, setShowNavList] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const toggleNavList = () => setShowNavList(!showNavList);
   const hideNavList = () => setShowNavList(false);
@@ -17,6 +21,10 @@ export default function Navbar() {
       <h1 onClick={hideNavList}>
         <Link href="/">Mo Blog</Link>
       </h1>
+
+      <button onClick={toggleTheme} className={classes["theme-btn"]}>
+        {theme === "light" ? <FaMoon /> : <IoSunnyOutline />}
+      </button>
 
       <ul
         className={`${classes["nav-list"]} ${
@@ -28,7 +36,7 @@ export default function Navbar() {
         <NavLink href="/about" text="About" hideNavList={hideNavList} />
         <NavLink href="/contacts" text="Contacts" hideNavList={hideNavList} />
         <NavLink href="/sign-up" text="Sign Up" hideNavList={hideNavList} />
-        <NavLink href="/login" text="Log In" hideNavList={hideNavList} />
+        <NavLink href="/login" text="Login" hideNavList={hideNavList} />
       </ul>
 
       <button
